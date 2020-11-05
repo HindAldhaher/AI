@@ -39,6 +39,8 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Bibliography" href="bibliography.html" />
+    <link rel="prev" title="Machine Learning (ML)" href="machinelearning.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
@@ -78,11 +80,73 @@
   </a>
  </li>
 </ul>
-<ul class="nav sidenav_l1">
- <li class="toctree-l1">
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
   <a class="reference internal" href="content.html">
    Contents of the course
   </a>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="concepts.html">
+     Concepts of AI
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="manifestation.html">
+     Manifestation of AI
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="blockdiag.html">
+     Block diagram of AI
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="aitools.html">
+     AI-Tools: Graph search
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="inference.html">
+     Probabilistic inference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="inference.html#probabilistic-classifier">
+     Probabilistic classifier
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="machinelearning.html">
+     Machine Learning (ML)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="machinelearning.html#linear-regression">
+     Linear regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="machinelearning.html#iris-classification-example">
+     Iris classification example
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Implementing a simple intelligent agent
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="bibliography.html">
+     Bibliography
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="exercises.html">
+     Excercises
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -153,7 +217,65 @@
             <i class="fas fa-list"></i> On this page
         </div>
         <nav id="bd-toc-nav">
-            
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-national-power-grid">
+   The national power grid
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#perceptions">
+     Perceptions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#decision-rules">
+     Decision rules
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#telecommunication-based-protection">
+     Telecommunication based protection
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#actions">
+     Actions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#smart-grid">
+   Smart grid
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#intelligent-agent-as-a-smart-grid-operator">
+     Intelligent agent as a smart grid operator
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#fault-detection-by-machine-learning">
+       Fault detection by machine learning
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#fault-location-by-graph-search">
+       Fault location by graph search
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#commercial-solutions">
+       Commercial solutions
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
         </nav>
     </div>
 </div>
@@ -164,6 +286,99 @@
                 
   <div class="section" id="implementing-a-simple-intelligent-agent">
 <h1>Implementing a simple intelligent agent<a class="headerlink" href="#implementing-a-simple-intelligent-agent" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="the-national-power-grid">
+<h2>The national power grid<a class="headerlink" href="#the-national-power-grid" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-center" id="fig-reflexagent">
+<a class="reference internal image-reference" href="_images/Kantaverkko.png"><img alt="_images/Kantaverkko.png" src="_images/Kantaverkko.png" style="width: 500px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 14 </span><span class="caption-text">The finnish power transmission grid maintained by the Finngrid. The distribution grid is connected to the transmission grid and is operated by distribution operators.</span><a class="headerlink" href="#fig-reflexagent" title="Permalink to this image">¶</a></p>
+</div>
+<p>National power grid is critical infrastructure which flawless operation is extremely important for all sectors of the society. For this reason, the power system can be also a target for intentional sabotage.</p>
+<p>Traditionally, energy was produced by a few large power stations and consumed by consumers. This kind of power grid is simple and cost efficient.</p>
+<div class="figure align-center" id="fig-treegrid">
+<a class="reference internal image-reference" href="_images/TreeGrid.svg"><img alt="_images/TreeGrid.svg" src="_images/TreeGrid.svg" width="500px" /></a>
+<p class="caption"><span class="caption-number">Fig. 15 </span><span class="caption-text">A tree structured power grid. The production is mostly centralized and consumption in on the leaves. The blue vertices are substations.</span><a class="headerlink" href="#fig-treegrid" title="Permalink to this image">¶</a></p>
+</div>
+<p>The substations takes care of the delivery of the power to the branches and they also monitor the power distribution, and possible faults. If a fault is found it can cut off power on some branches. The branches are protected by so called <em>protection relays</em>, which monitor the voltages and current in the distribution line. This kind of protection relay could be implemented as as simple reflex agent.</p>
+<div class="figure align-center" id="id1">
+<a class="reference internal image-reference" href="_images/protectionRelays.png"><img alt="_images/protectionRelays.png" src="_images/protectionRelays.png" style="width: 500px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 16 </span><span class="caption-text">An example of protection in a substation.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-center" id="id2">
+<a class="reference internal image-reference" href="_images/reflex_agents.png"><img alt="_images/reflex_agents.png" src="_images/reflex_agents.png" style="width: 500px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 17 </span><span class="caption-text">The simple reflex agent which monitors the power grid through current and voltage sensors.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<div class="section" id="perceptions">
+<h3>Perceptions<a class="headerlink" href="#perceptions" title="Permalink to this headline">¶</a></h3>
+<p>An intelligent agent needs to maintain it’s awareness of the situation by perceptions. In power systems the perceptions are usually obtained by current and voltage sensors. The agent can further process this information by calclating for example the sum of three phase voltages and calculate total power flown trough a cable. Quite often the agent also monitors the frequency of the powerline through these current measurements. More advanced protection relays may also monitor the shape of the current and react if it deviates from a sinusoidal waveform. The percepts directly and indirect calculated features provide information about the environment, which lets the agent to know enough from the state of the environment to decide actions.</p>
+<div class="figure align-center" id="id3">
+<a class="reference internal image-reference" href="_images/PV_system_fault.svg"><img alt="_images/PV_system_fault.svg" src="_images/PV_system_fault.svg" width="500px" /></a>
+<p class="caption"><span class="caption-number">Fig. 18 </span><span class="caption-text">An example of the measurements of three phase currents during a fault starting at 8.66 s. The figure displays also the sum of all currents calculated by the individual phase current measurements.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+<p>Some more advanced protection relays may also make other observations. For example arc protection relays monitor optically if they can see an electric arc due to short cuts. These arc protection relays can potentially find and react some serious faults faster than those only measuring the powerline only.</p>
+</div>
+<div class="section" id="decision-rules">
+<h3>Decision rules<a class="headerlink" href="#decision-rules" title="Permalink to this headline">¶</a></h3>
+<p>The decisions rules of the reflex agent are rather simple, since it does not have a model of the system. It can for example act as follows:</p>
+<ul class="simple">
+<li><p>If one of the phase currents are above the nominal threshold, say 0.75 of the maximum, there is probably a shortcut on the line, then act by cutting down the power from that line.</p></li>
+<li><p>If the combined power exceeds a threshold, for example 0.75 of the maximum power, then there is probably a shortcut or overloading situation, then cut down the power on the power line in question.</p></li>
+</ul>
+<p>These decision rules are simple and they can be described using logics and programmed directly</p>
+</div>
+<div class="section" id="telecommunication-based-protection">
+<h3>Telecommunication based protection<a class="headerlink" href="#telecommunication-based-protection" title="Permalink to this headline">¶</a></h3>
+<p>Some of these protection relays may also implement some additional commands over telecommunication network. These can be for example:</p>
+<ul class="simple">
+<li><p>Remote control. A remote system can send direct commands to shut down power in a specific powerline. In this case the decision is made already in the extenal node and it just simply overrides the decision mechanism of the agent.</p></li>
+<li><p>Another node can send remote observations over telecommunication network. For example a pair of agents can monitor the currents in both ends of the powerline segment to detect leakage. Then one of the relays can react to potentially dangerous leakage by cutting the power out of the powerline segment.</p></li>
+</ul>
+</div>
+<div class="section" id="actions">
+<h3>Actions<a class="headerlink" href="#actions" title="Permalink to this headline">¶</a></h3>
+<p>Typically the protective action made by a protecting relay is that it sends a command to switch to open, in order to cut the power from a power line.</p>
+<p>Sometimes the fault in the powerline can be intermittent, and a protection relay can also carry out a recovery procedure which includes disconnecting the power for a short while, and then try to reconnect it back. This procedure may be enough to shut down arcs on the cable, after which the system starts working again.</p>
+</div>
+</div>
+<div class="section" id="smart-grid">
+<h2>Smart grid<a class="headerlink" href="#smart-grid" title="Permalink to this headline">¶</a></h2>
+<p>The power system has been under a lot of changes during last decades due to changes in power production to reduce the CO2 emissions. Some of them are:</p>
+<ul class="simple">
+<li><p>The introduction of Variable Renewable Energy (VRE) sources, like wind and solar power.</p></li>
+<li><p>Large scale distributed energy production</p></li>
+<li><p>Heat is increasingly produced by electricity, often by heat pumps</p></li>
+<li><p>Energy storage is becoming more difficult</p></li>
+</ul>
+<p>In the future smart grid, energy flows bi-directionally and distributed production and consumers need to participate in keeping the network stable, maintaining the balance of consumption and production. The situational awareness needs to known at global level and produceres and consumers needs to co-operate. The fault diagnosis and control in bi-directional power grid cannot be accomplished by local measurements alone any longer.</p>
+<div class="figure align-center" id="fig-smartgrid">
+<a class="reference internal image-reference" href="_images/SmartNetwork.svg"><img alt="_images/SmartNetwork.svg" src="_images/SmartNetwork.svg" width="500px" /></a>
+<p class="caption"><span class="caption-number">Fig. 19 </span><span class="caption-text">A Smart power grid with network structure due to redundancy and bi-directional power flow due to distributed power production.</span><a class="headerlink" href="#fig-smartgrid" title="Permalink to this image">¶</a></p>
+</div>
+<p>The smart grid shown in the figure above is an inevitable consequence of the changes in the power production. Due to local production, some parts of the power grid could operate as separate islands in case of failure of the main transmission grid. To protect the consumers and to secure the flawless power delivery, the decisions for reacting faults and possibly changing oeration modes need to be made very fast, but at the same time the number of different options have grown exponentially due to combinatorial explosion of options.</p>
+<p>But if Alpha-Go was able to play Go-game, which is even more challenging problem, could it be also take care of operating smart grid better than a human operator?</p>
+<div class="section" id="intelligent-agent-as-a-smart-grid-operator">
+<h3>Intelligent agent as a smart grid operator<a class="headerlink" href="#intelligent-agent-as-a-smart-grid-operator" title="Permalink to this headline">¶</a></h3>
+<p>An agent capable of operating a smart grid needs to be more powerfull than a simple reflex agent. The fault locating and control decisions cannot be made on only local measurements any longer, but a wider area situational awareness is needed. A model of the power grid is the first prerequisite for smarter operation. The structure of the power grid can be modelled as bi-directional network graph, including loops.</p>
+<p>The graph can include information about the cable lengths, capacities and other properties on the edges. The nodes (or vertices) would be the end points of cables: power stations, substations (power distribution structures in the branches of the grid) or consumers. The nominal power of consumers and power plants would be stored in the vertices.</p>
+<div class="figure align-center" id="fig-utilityagent">
+<a class="reference internal image-reference" href="_images/utility_agents.png"><img alt="_images/utility_agents.png" src="_images/utility_agents.png" style="width: 500px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 20 </span><span class="caption-text">The utility agents extend the simple reflex agent by including a model having capability to plan actions and considering the utility gained by reaching the goal through different action sequences.</span><a class="headerlink" href="#fig-utilityagent" title="Permalink to this image">¶</a></p>
+</div>
+<div class="section" id="fault-detection-by-machine-learning">
+<h4>Fault detection by machine learning<a class="headerlink" href="#fault-detection-by-machine-learning" title="Permalink to this headline">¶</a></h4>
+<p>The currents and voltages on the powerline would be monitored by sensors connected to local computational devices, which would locally calculate relevant features about the measurements using suitable signal processing methods. The features would be sent to the computing center which would apply machine learning algorithms to judge if the situation is normal or not. For example, a classifier trained for anomaly detection (or outlier detection) could be used. Regression methods could be used to calculate additional information to improve situational awareness.</p>
+<p>The fault detection algorithm running on the computing center could use many measurements from different locations to make the fault detection more powerfull.</p>
+<p>These algorithms would need potentially plenty of training data. They could be run at first on side by side by the human operator, and it could learn to perform in the same way. But it is often find out afterwards that the decisions made by a human operator were not after all very optimal. Deeper analysis can be used to find out optimal solutions and those can be trained to the AI agent, to train it to react better than human operator.</p>
+</div>
+<div class="section" id="fault-location-by-graph-search">
+<h4>Fault location by graph search<a class="headerlink" href="#fault-location-by-graph-search" title="Permalink to this headline">¶</a></h4>
+<p>When a fault is detected and cannot be automatically fixed, it needs to located to make the manual reparation faster.  Some new methods</p>
+</div>
+<div class="section" id="commercial-solutions">
+<h4>Commercial solutions<a class="headerlink" href="#commercial-solutions" title="Permalink to this headline">¶</a></h4>
+<p>A company called <em>safegrid</em></p>
+</div>
+</div>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -194,6 +409,8 @@
     
     <div class='prev-next-bottom'>
         
+    <a class='left-prev' id="prev-link" href="machinelearning.html" title="previous page">Machine Learning (ML)</a>
+    <a class='right-next' id="next-link" href="bibliography.html" title="next page">Bibliography</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
