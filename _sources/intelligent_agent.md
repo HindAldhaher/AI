@@ -170,6 +170,17 @@ When a fault is detected and cannot be automatically fixed, it needs to located 
  
  The digital twin could also be used in operation side by side with the actual grid to help the AI to acquire wider situational awareness over the grid, simulate different actions and to learn while in operation. 
  
+ 
+```{figure} figures/smartGridAgent.svg
+---
+width: 500px
+align: center
+name: fig:sgsensor
+---
+
+An intelligent agent controlling a part of a smart grid.
+```
+ 
  What could go wrong?
  
  
