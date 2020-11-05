@@ -266,8 +266,8 @@
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#commercial-solutions">
-       Commercial solutions
+      <a class="reference internal nav-link" href="#digital-twin">
+       Digital twin
       </a>
      </li>
     </ul>
@@ -298,11 +298,12 @@
 <a class="reference internal image-reference" href="_images/TreeGrid.svg"><img alt="_images/TreeGrid.svg" src="_images/TreeGrid.svg" width="500px" /></a>
 <p class="caption"><span class="caption-number">Fig. 15 </span><span class="caption-text">A tree structured power grid. The production is mostly centralized and consumption in on the leaves. The blue vertices are substations.</span><a class="headerlink" href="#fig-treegrid" title="Permalink to this image">¶</a></p>
 </div>
-<p>The substations takes care of the delivery of the power to the branches and they also monitor the power distribution, and possible faults. If a fault is found it can cut off power on some branches. The branches are protected by so called <em>protection relays</em>, which monitor the voltages and current in the distribution line. This kind of protection relay could be implemented as as simple reflex agent.</p>
+<p>The substations takes care of the delivery of the power to the branches and they also monitor the power distribution, and possible faults. If a fault is found it can cut off power on some branches.</p>
 <div class="figure align-center" id="id1">
 <a class="reference internal image-reference" href="_images/protectionRelays.png"><img alt="_images/protectionRelays.png" src="_images/protectionRelays.png" style="width: 500px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 16 </span><span class="caption-text">An example of protection in a substation.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
+<p>The branches are protected by so called <em>protection relays</em>, which monitor the voltages and current in the distribution line. This kind of protection relay could be implemented as as simple reflex agent.</p>
 <div class="figure align-center" id="id2">
 <a class="reference internal image-reference" href="_images/reflex_agents.png"><img alt="_images/reflex_agents.png" src="_images/reflex_agents.png" style="width: 500px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 17 </span><span class="caption-text">The simple reflex agent which monitors the power grid through current and voltage sensors.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
@@ -368,14 +369,29 @@
 <p>The currents and voltages on the powerline would be monitored by sensors connected to local computational devices, which would locally calculate relevant features about the measurements using suitable signal processing methods. The features would be sent to the computing center which would apply machine learning algorithms to judge if the situation is normal or not. For example, a classifier trained for anomaly detection (or outlier detection) could be used. Regression methods could be used to calculate additional information to improve situational awareness.</p>
 <p>The fault detection algorithm running on the computing center could use many measurements from different locations to make the fault detection more powerfull.</p>
 <p>These algorithms would need potentially plenty of training data. They could be run at first on side by side by the human operator, and it could learn to perform in the same way. But it is often find out afterwards that the decisions made by a human operator were not after all very optimal. Deeper analysis can be used to find out optimal solutions and those can be trained to the AI agent, to train it to react better than human operator.</p>
+<p>The sensors measuring the curents and voltages of the power line on the field usually buffer raw measurement data for a few second. In case a fault is detected, the sensor can upload buffered raw signal to the computing center for further analysis.</p>
+<div class="figure align-center" id="fig-sgsensor">
+<a class="reference internal image-reference" href="figures/safegrid_sensor.png"><img alt="figures/safegrid_sensor.png" src="figures/safegrid_sensor.png" style="width: 500px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 21 </span><span class="caption-text">The voltage and current sensors by SafeGrid Oy.</span><a class="headerlink" href="#fig-sgsensor" title="Permalink to this image">¶</a></p>
+</div>
 </div>
 <div class="section" id="fault-location-by-graph-search">
 <h4>Fault location by graph search<a class="headerlink" href="#fault-location-by-graph-search" title="Permalink to this headline">¶</a></h4>
-<p>When a fault is detected and cannot be automatically fixed, it needs to located to make the manual reparation faster.  Some new methods</p>
+<p>When a fault is detected and cannot be automatically fixed, it needs to located to make the manual reparation faster.  Some new methods use multilateration through the power lines described by the graph, to find the location of the fault. The location accuracy can be from few meters to hunders of meters. The algorithm for fault location could be as follows:</p>
+<ol class="simple">
+<li><p>Begin the location algorithm when the fault detection module has found a fault.</p></li>
+<li><p>Read the timestamped error signal or timestamped features from the node which detected the fault first</p></li>
+<li><p>Follow the graph and find out the exact time of the signal anomaly caused by the fault by the neighbour nodes</p></li>
+<li><p>Triangulate the location of the fault using the graph and signal propagation velocity on the cable</p></li>
+</ol>
+<p>When the exact location of the fault is detected, it can be isolated and power returned to all other parts of the grid. If the location is fast enough, the other segments does not need to be depowered at all.</p>
 </div>
-<div class="section" id="commercial-solutions">
-<h4>Commercial solutions<a class="headerlink" href="#commercial-solutions" title="Permalink to this headline">¶</a></h4>
-<p>A company called <em>safegrid</em></p>
+<div class="section" id="digital-twin">
+<h4>Digital twin<a class="headerlink" href="#digital-twin" title="Permalink to this headline">¶</a></h4>
+<p>The training of the agent would be difficult on the actual power grid, because faults are rare and complex machine learning algorithms need plenty of training data. Therefore it would be necessary to build a digital model of the power grid which can be simulated. Different kinds of faults can be safely created to this fully digital twin of the actual power grid, and a machine learning algorithm can be safely let to control the grid learn about the consequences of actions. The training system could contain two AI:s, where one is trying to damage the grid by causing faults into it and another is trying to protect the grid and minimize the damage caused.</p>
+<p>After training the agent would be cabable of detecting faults, locating them and fastly selecting actions for minimizing the costs (maximizing utility).</p>
+<p>The digital twin could also be used in operation side by side with the actual grid to help the AI to acquire wider situational awareness over the grid, simulate different actions and to learn while in operation.</p>
+<p>What could go wrong?</p>
 </div>
 </div>
 </div>

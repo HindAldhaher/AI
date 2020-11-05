@@ -27,7 +27,7 @@ name: fig:treegrid
 A tree structured power grid. The production is mostly centralized and consumption in on the leaves. The blue vertices are substations.
 ```
 
-The substations takes care of the delivery of the power to the branches and they also monitor the power distribution, and possible faults. If a fault is found it can cut off power on some branches. The branches are protected by so called *protection relays*, which monitor the voltages and current in the distribution line. This kind of protection relay could be implemented as as simple reflex agent. 
+The substations takes care of the delivery of the power to the branches and they also monitor the power distribution, and possible faults. If a fault is found it can cut off power on some branches. 
 
 ```{figure} figures/protectionRelays.png
 ---
@@ -38,6 +38,8 @@ name: fig:reflexagent
 
 An example of protection in a substation.
 ```
+
+The branches are protected by so called *protection relays*, which monitor the voltages and current in the distribution line. This kind of protection relay could be implemented as as simple reflex agent. 
 
 
 ```{figure} figures/reflex_agents.png
@@ -130,7 +132,6 @@ name: fig:utilityagent
 The utility agents extend the simple reflex agent by including a model having capability to plan actions and considering the utility gained by reaching the goal through different action sequences.
 ```
 
-
 #### Fault detection by machine learning
 The currents and voltages on the powerline would be monitored by sensors connected to local computational devices, which would locally calculate relevant features about the measurements using suitable signal processing methods. The features would be sent to the computing center which would apply machine learning algorithms to judge if the situation is normal or not. For example, a classifier trained for anomaly detection (or outlier detection) could be used. Regression methods could be used to calculate additional information to improve situational awareness. 
 
@@ -138,10 +139,40 @@ The fault detection algorithm running on the computing center could use many mea
 
 These algorithms would need potentially plenty of training data. They could be run at first on side by side by the human operator, and it could learn to perform in the same way. But it is often find out afterwards that the decisions made by a human operator were not after all very optimal. Deeper analysis can be used to find out optimal solutions and those can be trained to the AI agent, to train it to react better than human operator. 
 
-#### Fault location by graph search 
-When a fault is detected and cannot be automatically fixed, it needs to located to make the manual reparation faster.  Some new methods 
+The sensors measuring the curents and voltages of the power line on the field usually buffer raw measurement data for a few second. In case a fault is detected, the sensor can upload buffered raw signal to the computing center for further analysis. 
 
-#### Commercial solutions
-A company called *safegrid*
+
+```{figure} figures/safegrid_sensor.png
+---
+width: 500px
+align: center
+name: fig:sgsensor
+---
+
+The voltage and current sensors by SafeGrid Oy.
+```
+
+#### Fault location by graph search 
+When a fault is detected and cannot be automatically fixed, it needs to located to make the manual reparation faster.  Some new methods use multilateration through the power lines described by the graph, to find the location of the fault. The location accuracy can be from few meters to hunders of meters. The algorithm for fault location could be as follows:
+
+ 1. Begin the location algorithm when the fault detection module has found a fault.
+ 1. Read the timestamped error signal or timestamped features from the node which detected the fault first
+ 1. Follow the graph and find out the exact time of the signal anomaly caused by the fault by the neighbour nodes
+ 1. Triangulate the location of the fault using the graph and signal propagation velocity on the cable
+ 
+ When the exact location of the fault is detected, it can be isolated and power returned to all other parts of the grid. If the location is fast enough, the other segments does not need to be depowered at all.
+ 
+ #### Digital twin
+ 
+ The training of the agent would be difficult on the actual power grid, because faults are rare and complex machine learning algorithms need plenty of training data. Therefore it would be necessary to build a digital model of the power grid which can be simulated. Different kinds of faults can be safely created to this fully digital twin of the actual power grid, and a machine learning algorithm can be safely let to control the grid learn about the consequences of actions. The training system could contain two AI:s, where one is trying to damage the grid by causing faults into it and another is trying to protect the grid and minimize the damage caused. 
+  
+ After training the agent would be cabable of detecting faults, locating them and fastly selecting actions for minimizing the costs (maximizing utility). 
+ 
+ The digital twin could also be used in operation side by side with the actual grid to help the AI to acquire wider situational awareness over the grid, simulate different actions and to learn while in operation. 
+ 
+ What could go wrong?
+ 
+ 
+
 
 
