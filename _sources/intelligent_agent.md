@@ -142,7 +142,7 @@ These algorithms would need potentially plenty of training data. They could be r
 The sensors measuring the curents and voltages of the power line on the field usually buffer raw measurement data for a few second. In case a fault is detected, the sensor can upload buffered raw signal to the computing center for further analysis. 
 
 
-```{figure} figures/safegrid_sensor.png
+```{figure} figures/safegrid_sensor.jpg
 ---
 width: 500px
 align: center
